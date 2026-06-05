@@ -7,7 +7,7 @@ Simple CLI to install a local Firebase extension from a checked-out repository.
 Run the CLI with `npx`:
 
 ```bash
-npx @whatsbox/firebase-whatsapp-extension-installer --project-id <your-firebase-project-id>
+npx @whatbox/install-firebase-extension-firestore-send-whatsapp-message --project-id <your-firebase-project-id>
 ```
 
 > Note: `bin/cli.js` currently uses a hardcoded project ID for testing and does not yet parse `--project-id`.

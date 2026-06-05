@@ -4,8 +4,8 @@ import { execa } from 'execa'; // Note: Execa uses ES Modules (import/export)
 import fs from 'fs';
 import path from 'path';
 
-const REPO_URL = "https://github.com/whatsb/firebase-extension-send-whatsapp-messages";
-const REPO_DIR = "firebase-extension-send-whatsapp-messages";
+const REPO_URL = "https://github.com/whatsb/firebase-extension-firestore-send-whatsapp-message";
+const REPO_DIR = "firebase-extension-firestore-send-whatsapp-message";
 const workDir = process.cwd();
 
 /**
