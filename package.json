@@ -1,0 +1,26 @@
+{
+  "name": "@whatsbox/firebase-whatsapp-extension-installer",
+  "version": "0.0.2",
+  "description": "CLI to clone and deploy the WhatsApp Firebase extension",
+    "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "firebase-whatsapp-extension-installer": "bin/cli.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "keywords": [
+    "firebase",
+    "extension",
+    "cli",
+    "firebase",
+    "whatsapp"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "execa": "^9.6.1"
+  }
+}

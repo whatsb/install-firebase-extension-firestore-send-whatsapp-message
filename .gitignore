@@ -1,0 +1,7 @@
+.vscode
+extensions
+firebase-extension-send-whatsapp-messages
+node_modules
+firebase.json
+.firebaserc
+*.log
