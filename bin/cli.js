@@ -3,9 +3,9 @@
 import { execa } from 'execa'; // Note: Execa uses ES Modules (import/export)
 import fs from 'fs';
 import path from 'path';
+import degit from 'degit';
 
-const REPO_URL = "https://github.com/whatsb/firebase-extension-firestore-send-whatsapp-message";
-const REPO_DIR = "firebase-extension-firestore-send-whatsapp-message";
+const ZIP_DIR = "firestore-send-whatsapp-message";
 const workDir = process.cwd();
 
 /**
@@ -81,10 +81,10 @@ function parseArgs() {
 async function main() {
     const projectId = parseArgs();
 
-    // delete existing repo directory, extensions dir if it exists to ensure a clean slate
-    const repoPath = path.join(workDir, REPO_DIR);
+    // delete existing repo directory, eZIP_DIRs dir if it exists to ensure a clean slate
+    const repoPath = path.join(workDir, ZIP_DIR);
     if (fs.existsSync(repoPath)) {
-        console.log(`\nCleaning up existing directory: ${REPO_DIR}`);
+        console.log(`\nCleaning up existing directory: ${ZIP_DIR}`);
         fs.rmSync(repoPath, { recursive: true, force: true });
     }
     const extensionsPath = path.join(workDir, 'extensions');
@@ -107,11 +107,17 @@ async function main() {
     // create firebase.json file with empty object "{}"
     fs.writeFileSync(firebaseJsonPath, '{}', 'utf-8');
 
-    console.log("\nStep 1: Cloning Repo...");
-    await runAutomatedCommand('git', ['clone', REPO_URL]);
+    console.log("\nStep 1: Fetching repository head with degit (branch: main)...");
+    const emitter = degit('whatsb/firebase-extension-firestore-send-whatsapp-message#main', { cache: false, force: true, verbose: false });
+    const targetPath = path.join(workDir, ZIP_DIR);
+    if (fs.existsSync(targetPath)) {
+        console.log(`\nCleaning up existing directory: ${ZIP_DIR}`);
+        fs.rmSync(targetPath, { recursive: true, force: true });
+    }
+    await emitter.clone(targetPath);
 
-    console.log("\nStep 2: Installing local Extension...");
-    await runManualCommand('npx', ['firebase-tools', 'ext:install', `./${REPO_DIR}`, '--project', projectId]);
+    console.log("\nStep 2: Installing local Extension...");ZIP_DIR
+    await runManualCommand('npx', ['firebase-tools', 'ext:install', `./${ZIP_DIR}`, '--project', projectId]);
 
     console.log("\nStep 3: Deploying Extension securely...");
     await runAutomatedCommand('npx', ['firebase-tools', 'deploy', '--only', 'extensions', '--project', projectId], {
@@ -121,8 +127,8 @@ async function main() {
     });
 
     // post installation cleanup - remove the cloned repo and extensions directory to leave a clean slate
-    if (fs.existsSync(repoPath)) {
-        console.log(`\nCleaning up directory: ${REPO_DIR}`);
+    if (fs.existsSync(repoPath)) {ZIP_DIR
+        console.log(`\nCleaning up directory: ${ZIP_DIR}`);
         fs.rmSync(repoPath, { recursive: true, force: true });
     }
     if (fs.existsSync(extensionsPath)) {

@@ -1,0 +1,42 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches all history so git log can read commit details accurately
+
+      - name: Get Commit Message and Description
+        id: commit_info
+        run: |
+          # Get the first line of the commit message (Subject)
+          SUBJECT=$(git log -1 --format=%s)
+          
+          # Get the rest of the commit message (Body/Description)
+          # We use a multiline environment variable to safely handle special characters and line breaks
+          echo "COMMIT_SUBJECT=$SUBJECT" >> $GITHUB_ENV
+          
+          echo "COMMIT_BODY<<EOF" >> $GITHUB_ENV
+          git log -1 --format=%b >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          # Uses the first line of your commit message as the Title
+          name: ${{ env.COMMIT_SUBJECT }}
+          # Uses the rest of your commit message as the Description
+          body: ${{ env.COMMIT_BODY }}
+          draft: false
+          prerelease: false

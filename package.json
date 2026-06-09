@@ -6,7 +6,7 @@
         "access": "public"
     },
     "bin": {
-        "install-firebase-extension-firestore-send-whatsapp-message": "bin/cli.js"
+        "install-firestore-send-whatsapp-message": "bin/cli.js"
     },
     "type": "module",
     "scripts": {
@@ -21,6 +21,7 @@
     ],
     "license": "MIT",
     "dependencies": {
-        "execa": "^9.6.1"
+        "execa": "^9.6.1",
+        "degit": "^2.8.0"
     }
 }

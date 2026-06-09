@@ -1,6 +1,6 @@
 .vscode
 extensions
-firebase-extension-send-whatsapp-messages
+firebase-extension-send-whatsapp-message
 node_modules
 firebase.json
 .firebaserc
