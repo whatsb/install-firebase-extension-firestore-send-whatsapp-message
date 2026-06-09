@@ -1,10 +1,14 @@
 {
     "name": "@whatsbox/install-firebase-extension-firestore-send-whatsapp-message",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "CLI to clone and deploy the WhatsApp Firebase extension",
     "publishConfig": {
         "access": "public"
     },
+    "files": [
+        "bin/"
+    ],
+    "main": "bin/cli.js",
     "bin": {
         "install-firestore-send-whatsapp-message": "bin/cli.js"
     },
@@ -20,6 +24,11 @@
         "whatsapp"
     ],
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/whatsb/install-firebase-extension-firestore-send-whatsapp-message.git"
+    },
+    "homepage": "https://github.com/whatsb/install-firebase-extension-firestore-send-whatsapp-message#readme",
     "dependencies": {
         "execa": "^9.6.1",
         "degit": "^2.8.0"
