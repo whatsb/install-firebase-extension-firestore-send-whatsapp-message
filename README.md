@@ -10,8 +10,6 @@ Run the CLI with `npx`:
 npx @whatsbox/install-firebase-extension-firestore-send-whatsapp-message --project-id <your-firebase-project-id>
 ```
 
-> Note: `bin/cli.js` currently uses a hardcoded project ID for testing and does not yet parse `--project-id`.
-
 ## Prerequisites
 
 - `git`
