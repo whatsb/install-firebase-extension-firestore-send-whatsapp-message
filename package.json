@@ -1,6 +1,6 @@
 {
     "name": "@whatsbox/install-firebase-extension-firestore-send-whatsapp-message",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "CLI to clone and deploy the WhatsApp Firebase extension",
     "publishConfig": {
         "access": "public"
